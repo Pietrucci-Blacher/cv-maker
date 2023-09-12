@@ -16,6 +16,7 @@ jobs:
         with:
           version: 8
           run_install: false
+
       - name: Get pnpm store directory
         shell: bash
         run: |
@@ -34,3 +35,12 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Run the tests
+        run: |
+          pnpm preview
+          sleep 5
+
+      - name: Test with curl
+        run: |
+          curl -I http://localhost:4173
