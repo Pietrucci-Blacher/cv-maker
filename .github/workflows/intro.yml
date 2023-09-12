@@ -36,9 +36,9 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Run the tests
+      - name: Run the server
         run: |
-          pnpm preview
+          pnpm preview &
           sleep 5
 
       - name: Test with curl
