@@ -2,6 +2,9 @@ name: Hello World
 
 on:
   push:
+    paths-ignore:
+      - '**.pdf'
+      - '**.mhtml'
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -94,6 +97,8 @@ jobs:
           mkdir -m 777 gen
           docker run -i --init --cap-add=SYS_ADMIN --network host -v ./gen:/home/pptruser/gen ghcr.io/puppeteer/puppeteer:latest node -e "$(cat snapshot.js)" http://localhost:4173 ./gen
           mv gen/* static/
+          sed -i 's/http:\/\/127.0.0.1:4173/https:\/\/cv.bnei.dev/g' ./static/*.mhtml
+
 
       - name: git config
         run: |
